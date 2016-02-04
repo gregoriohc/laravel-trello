@@ -108,6 +108,13 @@ class Wrapper
                     }
                 }
 
+                // Workaround for shared boards
+                foreach ($this->cache['boards'] as $item) {
+                    if ($name == $item['name']) {
+                        return $item['id'];
+                    }
+                }
+
                 break;
             case 'list':
                 if (!isset($options['organization'])) {
