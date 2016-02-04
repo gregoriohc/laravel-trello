@@ -33,8 +33,6 @@ class TrelloServiceProvider extends LaravelServiceProvider {
         $this->app['trello'] = $this->app->share(function($app) {
             return new Wrapper($app['config']);
         });
-
-        $this->app->alias('Trello', 'Gregoriohc\LaravelTrello\Facades\Wrapper');
     }
 
     /**

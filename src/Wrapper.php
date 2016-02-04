@@ -18,14 +18,14 @@ class Wrapper
     /**
      * The trello client instance
      *
-     * @var Client
+     * @var \Trello\Client
      */
     private $client;
 
     /**
      * The trello manager instance
      *
-     * @var Manager
+     * @var \Trello\Manager
      */
     private $manager;
 
@@ -47,18 +47,18 @@ class Wrapper
         $this->config = $config;
 
         // Retrieve the configuration variables
-        $apiKey = $this->config->get('trello::api_key');
-        $apiToken = $this->config->get('trello::api_token');
+        $apiKey = $this->config->get('trello.api_key');
+        $apiToken = $this->config->get('trello.api_token');
 
         // Make the client instance
-        $this->trelloClient = new Client();
-        $this->trelloClient->authenticate($apiKey, $apiToken, Client::AUTH_URL_CLIENT_ID);
+        $this->client = new Client();
+        $this->client->authenticate($apiKey, $apiToken, Client::AUTH_URL_CLIENT_ID);
     }
 
     /**
      * Returns trello manager instance
      *
-     * @return Manager
+     * @return \Trello\Manager
      */
     public function manager()
     {
@@ -94,7 +94,7 @@ class Wrapper
                 break;
             case 'board':
                 if (!isset($options['organization'])) {
-                    $options['organization'] = $this->config->get('trello::organization');
+                    $options['organization'] = $this->config->get('trello.organization');
                 }
                 $organizationId = $this->getObjectId('organization', $options['organization']);
 
@@ -111,10 +111,10 @@ class Wrapper
                 break;
             case 'list':
                 if (!isset($options['organization'])) {
-                    $options['organization'] = $this->config->get('trello::organization');
+                    $options['organization'] = $this->config->get('trello.organization');
                 }
                 if (!isset($options['board'])) {
-                    $options['board'] = $this->config->get('trello::board');
+                    $options['board'] = $this->config->get('trello.board');
                 }
 
                 $boardId = $this->getObjectId('board', $options['board'], ['organization' => $options['organization']]);
@@ -141,7 +141,7 @@ class Wrapper
      */
     public function getDefaultOrganizationId()
     {
-        return $this->getObjectId('organization', $this->config->get('trello::organization'));
+        return $this->getObjectId('organization', $this->config->get('trello.organization'));
     }
 
     /**
@@ -151,7 +151,7 @@ class Wrapper
      */
     public function getDefaultBoardId()
     {
-        return $this->getObjectId('board', $this->config->get('trello::board'));
+        return $this->getObjectId('board', $this->config->get('trello.board'));
     }
 
     /**
@@ -161,7 +161,7 @@ class Wrapper
      */
     public function getDefaultListId()
     {
-        return $this->getObjectId('list', $this->config->get('trello::list'));
+        return $this->getObjectId('list', $this->config->get('trello.list'));
     }
 
     /**

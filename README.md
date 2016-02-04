@@ -27,7 +27,14 @@ Firstly, add the `Gregoriohc\LaravelTrello\TrelloServiceProvider` provider to th
 ],
 ```
 
-The facade its automatically registered with the provider, so its not necessary to include it on your app `aliases` array.
+and then add the facade to your `aliases` array
+
+```php
+'aliases' => [
+  ...
+  'Trello' => Gregoriohc\LaravelTrello\Facades\Wrapper::class,
+],
+```
 
 ### Configuration
 
