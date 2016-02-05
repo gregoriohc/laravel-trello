@@ -1,5 +1,7 @@
 # Laravel 5 Trello API wrapper
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/gregoriohc/laravel-trello/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/gregoriohc/laravel-trello/?branch=master)
+
 A simple Laravel 5 package that wraps [Trello](https://trello.com) API.
 
 ## Requirements

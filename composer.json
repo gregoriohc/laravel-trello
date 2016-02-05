@@ -1,7 +1,7 @@
 {
   "name": "gregoriohc/laravel-trello",
   "description": "A Laravel wrapper and facade package for the Trello API",
-  "keywords": [],
+  "keywords": ["laravel", "package", "facade", "trello", "api"],
   "homepage": "https://github.com/gregoriohc/laravel-trello",
   "license": "MIT",
   "authors": [

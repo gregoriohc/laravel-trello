@@ -43,16 +43,12 @@ class Wrapper
      */
     public function __construct(Repository $config)
     {
-        // Fetch the config data and set up the required url´s
+        // Get the config data
         $this->config = $config;
-
-        // Retrieve the configuration variables
-        $apiKey = $this->config->get('trello.api_key');
-        $apiToken = $this->config->get('trello.api_token');
 
         // Make the client instance
         $this->client = new Client();
-        $this->client->authenticate($apiKey, $apiToken, Client::AUTH_URL_CLIENT_ID);
+        $this->client->authenticate($this->config->get('trello.api_key'), $this->config->get('trello.api_token'), Client::AUTH_URL_CLIENT_ID);
     }
 
     /**
@@ -130,6 +126,26 @@ class Wrapper
                 }
 
                 foreach ($this->cache['lists'][$boardId] as $item) {
+                    if ($name == $item['name']) {
+                        return $item['id'];
+                    }
+                }
+
+                break;
+            case 'label':
+                if (!isset($options['organization'])) {
+                    $options['organization'] = $this->config->get('trello.organization');
+                }
+                if (!isset($options['board'])) {
+                    $options['board'] = $this->config->get('trello.board');
+                }
+
+                $boardId = $this->getObjectId('board', $options['board'], ['organization' => $options['organization']]);
+                if (!isset($this->cache['labels'][$boardId])) {
+                    $this->cache['labels'][$boardId] = $this->api('board')->labels()->all($boardId);
+                }
+
+                foreach ($this->cache['labels'][$boardId] as $item) {
                     if ($name == $item['name']) {
                         return $item['id'];
                     }
