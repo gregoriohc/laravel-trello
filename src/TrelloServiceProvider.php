@@ -30,7 +30,7 @@ class TrelloServiceProvider extends LaravelServiceProvider {
      */
     public function register() {
 
-        $this->app['trello'] = $this->app->share(function($app) {
+        $this->app->singleton('trello', function($app) {
             return new Wrapper($app['config']);
         });
     }
