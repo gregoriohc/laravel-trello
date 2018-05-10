@@ -54,12 +54,13 @@ class Wrapper
     /**
      * Returns trello manager instance
      *
+     * @param null $client
      * @return \Trello\Manager
      */
-    public function manager()
+    public function manager($client = null)
     {
         if (!isset($this->manager)) {
-            $this->manager = new Manager($this->client);
+            $this->manager = new Manager($client ? $client : $this->client);
         }
 
         return $this->manager;
